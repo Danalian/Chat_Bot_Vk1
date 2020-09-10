@@ -76,23 +76,32 @@ for event in longpoll.listen():
             request = event.text.lower()
             response = request
 
+            keyboard = create_keyboard(response)
+            vk.messages.send(
+                key=('068a77450545f9c980b134f4ecee1a25a8ccaf7e'),  # ВСТАВИТЬ ПАРАМЕТРЫ
+                server=('https://lp.vk.com/wh198461809'),
+                ts=('286'),
+                random_id=get_random_id(),
+                message='Привет!',
+                chat_id=event.chat_id,
+                keyboard=keyboard
+            )
+            
             # Логика формирования ответа бота
             if ('Привет' in request):
                 otvet = 'Ну привет, если не шутишь!'
                 write_msg(event.user_id, otvet)
             elif ('Клавиатура' in request):
                 keyboard = create_keyboard(response)
-            #     здесь что то нужно прописать, но я хз что, перепробывал уже многое
-
-            # vk.messages.send(
-            #     key=(''),  # ВСТАВИТЬ ПАРАМЕТРЫ
-            #     server=(''),
-            #     ts=(''),
-            #     random_id=get_random_id(),
-            #     message='Привет!',
-            #     chat_id=event.chat_id
-            # )
-            #  Сообщения в таком формате не отправляются хз почему
-            else :
+                vk.messages.send(
+                    key=('068a77450545f9c980b134f4ecee1a25a8ccaf7e'),  # ВСТАВИТЬ ПАРАМЕТРЫ
+                    server=('https://lp.vk.com/wh198461809'),
+                    ts=('286'),
+                    random_id=get_random_id(),
+                    message='Привет!',
+                    chat_id=event.chat_id,
+                    keyboard=keyboard
+                )
+            else:
                 otvet = 'Я только на "Привет" реагирую'
                 write_msg(event.user_id, otvet)
