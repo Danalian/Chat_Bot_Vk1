@@ -3,7 +3,7 @@ from vk_api.longpoll import VkLongPoll, VkEventType
 from vk_api.keyboard import VkKeyboard, VkKeyboardColor
 
 # API токен сообщества
-mytoken = '010c39c'
+mytoken = ''
 
 keyboard = VkKeyboard(one_time=True, inline=True)
 keyboard.add_button('Привет', color=VkKeyboardColor.NEGATIVE)
