@@ -77,31 +77,37 @@ for event in longpoll.listen():
             response = request
 
             keyboard = create_keyboard(response)
-            vk.messages.send(
-                key=('068a77450545f9c980b134f4ecee1a25a8ccaf7e'),  # ВСТАВИТЬ ПАРАМЕТРЫ
-                server=('https://lp.vk.com/wh198461809'),
-                ts=('286'),
-                random_id=get_random_id(),
-                message='Привет!',
-                chat_id=event.chat_id,
-                keyboard=keyboard
-            )
-            
+            key = '068a77450545f9c980b134f4ecee1a25a8ccaf7e'
+            server = ('https://lp.vk.com/wh198461809')
+            ts = ('286')
+            random_id = vk_api.utils.get_random_id()
+            message = 'Привет!'
+            user_id = event.user_id
+            keyboard = keyboard
+            # vk.method('messages.send', {'user_id': user_id, 'message': message, 'random_id': random_id})
+            vk.method('messages.send', {'user_id': user_id,
+                                        'message': message,
+                                        'random_id': random_id,
+                                        'key': key,
+                                        'server': server,
+                                        'ts': ts
+                                        })
+
             # Логика формирования ответа бота
             if ('Привет' in request):
                 otvet = 'Ну привет, если не шутишь!'
                 write_msg(event.user_id, otvet)
-            elif ('Клавиатура' in request):
-                keyboard = create_keyboard(response)
-                vk.messages.send(
-                    key=('068a77450545f9c980b134f4ecee1a25a8ccaf7e'),  # ВСТАВИТЬ ПАРАМЕТРЫ
-                    server=('https://lp.vk.com/wh198461809'),
-                    ts=('286'),
-                    random_id=get_random_id(),
-                    message='Привет!',
-                    chat_id=event.chat_id,
-                    keyboard=keyboard
-                )
+           # elif ('Клавиатура' in request):
+                # keyboard = create_keyboard(response)
+                # vk.method = messages.send(
+                #     key=('068a77450545f9c980b134f4ecee1a25a8ccaf7e'),  # ВСТАВИТЬ ПАРАМЕТРЫ
+                #     server=('https://lp.vk.com/wh198461809'),
+                #     ts=('286'),
+                #     random_id=get_random_id(),
+                #     message='Привет!',
+                #     chat_id=event.chat_id,
+                #     keyboard=keyboard
+                # )
             else:
                 otvet = 'Я только на "Привет" реагирую'
                 write_msg(event.user_id, otvet)
